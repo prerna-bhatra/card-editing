@@ -17,16 +17,21 @@
     }
 
     #my-node {
-        background-image: url('https://cdn2.vectorstock.com/i/thumb-large/71/96/curled-silver-corner-on-orange-background-vector-7997196.jpg');
+        /* background-image: url('https://cdn2.vectorstock.com/i/thumb-large/71/96/curled-silver-corner-on-orange-background-vector-7997196.jpg'); */
         background-repeat: no-repeat;
     }
     #company-logo
     {
+        /* width: 100px; */
         /* width: 100px;
         height: 100px; */
         
     }
 
+    
+    #company-logo img{
+        width: 50%;
+    }
     #image-data {
         border: 1px solid black;
         padding: 50px 50px 50px 50px;
@@ -36,11 +41,11 @@
 
     #lpu-logo {
         float: right;
-        width: 100px;
+        /* width: 100px; */
     }
 
     #lpu-logo img {
-        width: 100%;
+        width: 50%;
     }
 </style>
 
@@ -49,10 +54,10 @@
     <div class=" text-center">
 
         <body>
-            <div>
+            <div id="upper-body">
                 <h1>Card Design</h1>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
 
                         <label for="">Write Message here </label>
                         <textarea id="msg-value" type="text" onkeyup="messageValue(event)"
@@ -63,11 +68,14 @@
                 </div>
                 <div id="image-data">
                     <div id="my-node">
-                        <div id="img-area">
-                            <div id="company-logo">
+                        <div id="img-area" class="row">
+                            <div id="company-logo" class="col-sm-4">
                                 <img src="" id="output_image" alt="company logo">
                             </div>
-                            <div id="lpu-logo">
+                            <div class="col-sm-4">
+
+                            </div>
+                            <div id="lpu-logo" class="col-sm-4">
                                 <img src="https://upload.wikimedia.org/wikipedia/en/3/3a/Lovely_Professional_University_logo.png"
                                     alt="">
                             </div>
@@ -121,16 +129,14 @@
 
                     domtoimage.toPng(node)
                         .then(function (dataUrl) {
-                            // var img = new Image();
-                            // img.src = dataUrl;
-                            // console.log("IMAGE ", img)
-                            // let imgArea = document.getElementById('img-area');
-                            // imgArea.appendChild(img);
-                            // // console.log("IMAGE AREA",imgArea)
-                            // node.appendChild(imgArea)
-
                             console.log("IMAGE URL ", dataUrl)
+                            let upperBody = document.getElementById('upper-body');
 
+                            // var win = window.open();
+                            //  win.document.write('<iframe src="' + dataUrl  
+                            //  + 
+                            //  '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>');
+                
 
                         })
                         .catch(function (error) {
