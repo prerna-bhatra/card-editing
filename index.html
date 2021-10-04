@@ -95,7 +95,7 @@
             </div>
             <script>
                 function companyImage(event) {
-                    console.log("IMAGE ", event)
+
                     document.getElementById('output_image').style.display = 'block';
                     var reader = new FileReader();
                     reader.onload = function () {
@@ -110,17 +110,17 @@
                     let extraKey = ['CapsLock', 'Shift', 'Control', 'ArrowRight', 'ArrowLeft'];
                     if (extraKey.indexOf(event.key) < 0) {
                         if (event.key == "Enter") {
-                            console.log("IF 1")
+
                             document.getElementById('msg-area').innerHTML += '<br/>';
                         }
                         else if (event.key == 'Backspace') {
-                            console.log("BACKSPACE")
+
                             let prevVal = document.getElementById('msg-value').value;
                             document.getElementById('msg-area').innerHTML = prevVal;
-                            console.log("PREV VALE", prevVal);
+
                         }
                         else {
-                            console.log("ELSEE 3")
+
                             document.getElementById('msg-area').innerHTML += event.key;
                         }
 
@@ -134,17 +134,14 @@
                     domtoimage.toJpeg(node)
                         .then(function (dataUrl) {
                             var link = document.createElement('a');
-                            link.innerText="download";
+                            link.innerText = "download";
                             link.download = 'my-image-name.jpeg';
                             link.href = dataUrl;
                             link.click();
                             let upperBody = document.getElementById('upper-body');
                             upperBody.appendChild(link)
 
-                            // var win = window.open();
-                            //  win.document.write('<iframe src="' + dataUrl  
-                            //  + 
-                            //  '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>');
+
 
 
                         })
