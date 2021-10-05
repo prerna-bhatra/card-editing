@@ -13,21 +13,23 @@
 </head>
 <style>
     #img-area {
-        height: 600px;
+        background-color: rgba(0, 0, 0.5, 0.9);
+        height: auto;
+        padding: 70px 0px 70px 0px;
     }
 
     #my-node {
-        /* background-image: url('https://cdn2.vectorstock.com/i/thumb-large/71/96/curled-silver-corner-on-orange-background-vector-7997196.jpg'); */
+        background-image: url('https://image.freepik.com/free-vector/large-tropical-green-leaves-background_52683-36490.jpg');
         background-repeat: no-repeat;
+        /* background-color: aqua; */
+        padding: 40px 0px 40px 0px;
     }
 
 
     #company-logo {
         width: 100px;
         display: inline-block;
-        /* width: 100px; */
-        /* width: 100px;
-        height: 100px; */
+
 
     }
 
@@ -37,8 +39,8 @@
     }
 
     #image-data {
-        border: 1px solid black;
-        padding: 50px 50px 50px 50px;
+
+        padding: 10px 10px 10px 10px;
         margin-left: 15px;
         height: 500px;
     }
@@ -47,36 +49,53 @@
         width: 100px;
         display: inline-block;
         float: right;
-        /* width: 100px; */
+
     }
 
     #lpu-logo img {
         width: 50%;
     }
+
+    #msg-area {
+        color: aliceblue;
+    }
+
+    #user-input {
+        padding: 0px 30px 0px 30px;
+        margin-bottom: 10px;
+    }
+    #download-btn{
+        float: right;
+    }
 </style>
 
 <body>
-
-    <div class=" text-center">
+    <div>
 
         <body>
             <div id="upper-body">
-                <h1>Card Design</h1>
-                <div class="row">
+                <center><h4>Card Design</h4></center>
+                <div id="user-input" class="row">
                     <div class="col-sm-12">
-
-                        <label for="">Write Message here </label>
-                        <textarea id="msg-value" type="text" onkeyup="messageValue(event)"
+                        <div class="form-group">
+                            <label for="">Message  </label>
+                            <textarea id="msg-value" type="text" onkeyup="messageValue(event)"
                             class="form-control"></textarea>
-                        <input type="file" name="" id="company-logo" onchange="companyImage(event)">
-                        <button onclick="myFunction()">generate image</button>
+                        </div>
+                        <label for="">Company Logo  </label>
+                            <div class="form-group">
+                                
+                                <input class="form-control" type="file" name="" id="company-logo" onchange="companyImage(event)">
+                            </div>
+                        <button id="download-btn" class="btn btn-success"  onclick="myFunction()">download image</button>
                     </div>
                 </div>
+                <hr>
                 <div id="image-data">
                     <div id="my-node">
                         <div id="img-area">
                             <div id="company-logo">
-                                <img src="" id="output_image" alt="company logo">
+                                <img src="" id="output_image" alt="company logo" style="color: white;">
                             </div>
 
                             <div id="lpu-logo">
@@ -107,8 +126,9 @@
 
                 function messageValue(event) {
 
-                    let extraKey = ['CapsLock', 'Shift', 'Control', 'ArrowRight', 'ArrowLeft'];
-                    if (extraKey.indexOf(event.key) < 0) {
+                    console.log("CODE ",event.code)
+                    let extraKey = ['CapsLock', 'ShiftLeft','ShiftRight', 'ControlRight','ControlRight', 'ArrowRight', 'ArrowLeft','ArrowDown' ,'ArrowUp'];
+                    if (extraKey.indexOf(event.code) < 0) {
                         if (event.key == "Enter") {
 
                             document.getElementById('msg-area').innerHTML += '<br/>';
@@ -128,9 +148,7 @@
 
                 }
                 function myFunction() {
-
                     var node = document.getElementById('my-node');
-
                     domtoimage.toJpeg(node)
                         .then(function (dataUrl) {
                             var link = document.createElement('a');
@@ -140,12 +158,9 @@
                             link.click();
                             let upperBody = document.getElementById('upper-body');
                             upperBody.appendChild(link)
-
-
-
-
                         })
                         .catch(function (error) {
+                            alert("Please choose a file for company logo ")
                             console.error('oops, something went wrong!', error);
                         });
                 }
