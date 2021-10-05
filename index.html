@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Template Design</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+
 </head>
 <style>
     #img-area {
@@ -29,17 +31,13 @@
     #company-logo {
         width: 100px;
         display: inline-block;
-
-
     }
-
 
     #company-logo img {
         width: 50%;
     }
 
     #image-data {
-
         padding: 10px 10px 10px 10px;
         margin-left: 15px;
         height: 500px;
@@ -49,7 +47,6 @@
         width: 100px;
         display: inline-block;
         float: right;
-
     }
 
     #lpu-logo img {
@@ -64,8 +61,14 @@
         padding: 0px 30px 0px 30px;
         margin-bottom: 10px;
     }
-    #download-btn{
+
+    #download-btn {
         float: right;
+    }
+    #msg-value{
+        border: 1px solid black;
+        height: auto;
+        min-height: 50px;
     }
 </style>
 
@@ -74,20 +77,26 @@
 
         <body>
             <div id="upper-body">
-                <center><h4>Card Design</h4></center>
+                <center>
+                    <h4>Card Design</h4>
+                </center>
                 <div id="user-input" class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <label for="">Message  </label>
-                            <textarea id="msg-value" type="text" onkeyup="messageValue(event)"
-                            class="form-control"></textarea>
+                            <label for="">Message </label>
+                            <!-- <textarea id="msg-value" type="text" onkeyup="messageValue(event)"
+                            class="form-control"></textarea> -->
+                            <!-- <textarea  id="msg-value" ></textarea> -->
+                            <div contenteditable="true" id="msg-value"></div>
                         </div>
-                        <label for="">Company Logo  </label>
-                            <div class="form-group">
-                                
-                                <input class="form-control" type="file" name="" id="company-logo" onchange="companyImage(event)">
-                            </div>
-                        <button id="download-btn" class="btn btn-success"  onclick="myFunction()">download image</button>
+                        <label for="">Company Logo </label>
+                        <div class="form-group">
+                            <input class="form-control" type="file" name="" id="company-logo"
+                                onchange="companyImage(event)">
+                        </div>
+
+                        <button id="geteditorData">DATA</button>
+                        <button id="download-btn" class="btn btn-success" onclick="myFunction()">download image</button>
                     </div>
                 </div>
                 <hr>
@@ -113,6 +122,22 @@
 
             </div>
             <script>
+                let data;
+                let dataDiv = document.getElementById('msg-value');
+                dataDiv.addEventListener('input',(e)=>{
+                    console.log("DATA",e,"value",e.data);
+                    if(e.data===null)
+                    {
+                        document.getElementById('msg-area').innerHTML+= '</br>'
+                    }
+                    else{
+                        document.getElementById('msg-area').innerHTML+= e.data;
+                    }
+                  
+                })
+
+
+
                 function companyImage(event) {
 
                     document.getElementById('output_image').style.display = 'block';
@@ -126,8 +151,8 @@
 
                 function messageValue(event) {
 
-                    console.log("CODE ",event.code)
-                    let extraKey = ['CapsLock', 'ShiftLeft','ShiftRight', 'ControlRight','ControlRight', 'ArrowRight', 'ArrowLeft','ArrowDown' ,'ArrowUp'];
+                    console.log("CODE ", event.target.value)
+                    let extraKey = ['CapsLock', 'ShiftLeft', 'ShiftRight', 'ControlRight', 'ControlRight', 'ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp'];
                     if (extraKey.indexOf(event.code) < 0) {
                         if (event.key == "Enter") {
 
