@@ -17,12 +17,13 @@
     #img-area {
         background-color: rgba(0, 0, 0.5, 0.9);
         height: auto;
-        padding: 70px 0px 70px 0px;
+        padding: 70px 40px 70px 40px;
     }
 
     #my-node {
         background-image: url('https://image.freepik.com/free-vector/large-tropical-green-leaves-background_52683-36490.jpg');
         background-repeat: no-repeat;
+        background-size: cover;
         /* background-color: aqua; */
         padding: 40px 0px 40px 0px;
     }
@@ -34,7 +35,7 @@
     }
 
     #company-logo img {
-        width: 50%;
+        width: 100%;
     }
 
     #image-data {
@@ -50,7 +51,7 @@
     }
 
     #lpu-logo img {
-        width: 50%;
+        width: 100%;
     }
 
     #msg-area {
@@ -68,7 +69,7 @@
     #msg-value{
         border: 1px solid black;
         height: auto;
-        min-height: 50px;
+        min-height: 100px;
     }
 </style>
 
@@ -95,7 +96,7 @@
                                 onchange="companyImage(event)">
                         </div>
 
-                        <button id="geteditorData">DATA</button>
+                       
                         <button id="download-btn" class="btn btn-success" onclick="myFunction()">download image</button>
                     </div>
                 </div>
@@ -104,14 +105,14 @@
                     <div id="my-node">
                         <div id="img-area">
                             <div id="company-logo">
-                                <img src="" id="output_image" alt="company logo" style="color: white;">
+                                <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/insurance-company-your-logo-design-template-de2398bb234024633dcd5a368a37201a_screen.jpg?ts=1611064322" id="output_image" alt="company logo" style="color: white;">
                             </div>
 
                             <div id="lpu-logo">
                                 <img src="https://upload.wikimedia.org/wikipedia/en/3/3a/Lovely_Professional_University_logo.png"
                                     alt="">
                             </div>
-                            <div>
+                            <div class="text-center">
                                 <p id="msg-area"></p>
                             </div>
                         </div>
@@ -125,14 +126,26 @@
                 let data;
                 let dataDiv = document.getElementById('msg-value');
                 dataDiv.addEventListener('input',(e)=>{
-                    console.log("DATA",e,"value",e.data);
-                    if(e.data===null)
+                    if(e.inputType==='insertParagraph')
                     {
-                        document.getElementById('msg-area').innerHTML+= '</br>'
+                        document.getElementById('msg-area').innerHTML+= '</br>'     
+                    }
+                    else if(e.inputType==='deleteContentBackward')
+                    {
+                        let prevVal = document.getElementById('msg-value').innerHTML;
+                        document.getElementById('msg-area').innerHTML = prevVal;
                     }
                     else{
-                        document.getElementById('msg-area').innerHTML+= e.data;
+                        let prevVal = document.getElementById('msg-value').innerHTML;
+                        document.getElementById('msg-area').innerHTML=prevVal;
                     }
+                    // if(e.data===null)
+                    // {
+                    //     document.getElementById('msg-area').innerHTML+= '</br>'
+                    // }
+                    // else{
+                    //     document.getElementById('msg-area').innerHTML+= e.data;
+                    // }
                   
                 })
 
@@ -150,8 +163,6 @@
                 }
 
                 function messageValue(event) {
-
-                    console.log("CODE ", event.target.value)
                     let extraKey = ['CapsLock', 'ShiftLeft', 'ShiftRight', 'ControlRight', 'ControlRight', 'ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp'];
                     if (extraKey.indexOf(event.code) < 0) {
                         if (event.key == "Enter") {
